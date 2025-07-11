@@ -24,16 +24,21 @@ EOF
 
 # Downloanding Pagila files
 if [ -d "pagila" ]; then
-    cd pagila
-else
-    mkdir pagila && cd pagila
+    rm -rf pagila
 fi
+
+mkdir pagila && cd pagila
 
 wget https://github.com/devrimgunduz/pagila/raw/master/pagila-schema.sql
 wget https://github.com/devrimgunduz/pagila/raw/master/pagila-data.sql
 
 # Intalling Pagila
-sudo -u postgres psql -d pagila -f pagila-schema.sql
-sudo -u postgres psql -d pagila -f pagila-data.sql
+sudo -u $USER_DB psql -d pagila -f pagila-schema.sql
+sudo -u $USER_DB psql -d pagila -f pagila-data.sql
+
+sudo -u $USER_DB psql -d pagila <<EOF
+ALTER SCHEMA public RENAME TO raw;
+CREATE SCHEMA traeted;
+EOF
 
 echo "Pagila instaled!"
