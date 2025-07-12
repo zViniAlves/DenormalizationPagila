@@ -1,0 +1,13 @@
+SELECT
+	staff_id,
+	first_name,
+	last_name,
+	address_id,
+	email,
+	active,
+	username,
+	password,
+	last_update,
+	picture
+FROM
+	raw.staff

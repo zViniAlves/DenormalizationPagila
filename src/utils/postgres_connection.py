@@ -26,4 +26,4 @@ class PostgressConection():
         return self.spark.read.jdbc(url=self.url,table=query,properties=self.properties)
 
     def create_trated_table(self,df,table_name:str):
-        df.write.jdbc(url=self.url,table=f'traeted.{table_name}',properties=self.properties)
+        df.write.mode('overwrite').jdbc(url=self.url,table=f'traeted.{table_name}',properties=self.properties)
