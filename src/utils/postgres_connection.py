@@ -19,11 +19,11 @@ class PostgressConection():
         self.url = f"jdbc:postgresql://{self.host}:{self.port}/pagila"
         self.properties = {
             "user": self.user,
-            "psw": self.psw
+            "password": self.psw
         }
 
     def execute_query(self,query:str):
-        return self.spark.read.jdbc(url=self.url,query=query,properties=self.properties)
+        return self.spark.read.jdbc(url=self.url,table=query,properties=self.properties)
 
     def create_trated_table(self,df,table_name:str):
-        df.write.jdbc(url=self.url,table=table_name,property=self.properties)
+        df.write.mode('overwrite').jdbc(url=self.url,table=f'traeted.{table_name}',properties=self.properties)

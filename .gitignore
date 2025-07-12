@@ -2,4 +2,11 @@
 .venv
 .env
 
+# Compiled execution files
+*.pyc
+
+# Downloads
+*.zip
+*.tar.gz
+*.tar.bz2
 pagila/*
